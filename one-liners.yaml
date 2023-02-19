@@ -28,6 +28,7 @@ python: |
   EOF
   ) file
 canonical:
+  sed -i 's/you/me/g' file
 
 ---
 

@@ -38,6 +38,13 @@ EOF
 ```
 </details>
 
+<details><summary>canonical:</summary>
+
+```bash
+sed -i 's/you/me/g' file
+```
+</details>
+
 
 
 ---
