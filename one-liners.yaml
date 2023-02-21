@@ -20,15 +20,36 @@ perl:
 python: |
   python <(cat <<'EOF'
   import sys, re
-  replaced = ''
-  with open(sys.argv[1], 'r') as f:
+  file, replaced = sys.argv[1], ''
+  with open(file, 'r') as f:
     replaced = re.sub('you', 'me', f.read())
-  with open(sys.argv[1], 'w') as f:
+  with open(file, 'w') as f:
     f.write(replaced)
   EOF
   ) file
 canonical:
   sed -i 's/you/me/g' file
+
+---
+
+title: |
+  The same thing, just in several files and only in lines containing digits.
+perl:
+  perl -pi -e 's/you/me/g if /\d/' file1 file2 file3
+
+---
+
+title: |
+  Find all lines that occur more than once.
+perl:
+  perl -ne 'print if $a{$_}++' file
+
+---
+
+title: |
+  Print out the file with lines numbered.
+perl:
+  perl -ne 'print "$. $_"' file
 
 ---
 

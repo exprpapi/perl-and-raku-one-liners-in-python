@@ -12,8 +12,7 @@ The 'canonical' solution, if given, is how I would actually do it, if I had to. 
 
 
 ---
-### Replace patterns in file
-Replace all occurences of `you` by `me` in the file `file`
+### Replace all occurences of `you` by `me` in the file `file`
 
 <details><summary>perl:</summary>
 
@@ -27,10 +26,10 @@ perl -pi -e 's/you/me/g' file
 ```bash
 python <(cat <<'EOF'
 import sys, re
-replaced = ''
-with open(sys.argv[1], 'r') as f:
+file, replaced = sys.argv[1], ''
+with open(file, 'r') as f:
   replaced = re.sub('you', 'me', f.read())
-with open(sys.argv[1], 'w') as f:
+with open(file, 'w') as f:
   f.write(replaced)
 EOF
 ) file
@@ -42,6 +41,45 @@ EOF
 
 ```bash
 sed -i 's/you/me/g' file
+```
+</details>
+
+
+
+
+---
+### The same thing, just in several files and only in lines containing digits.
+
+<details><summary>perl:</summary>
+
+```bash
+perl -pi -e 's/you/me/g if /\d/' file1 file2 file3
+```
+</details>
+
+
+
+
+---
+### Find all lines that occur more than once.
+
+<details><summary>perl:</summary>
+
+```bash
+perl -ne 'print if $a{$_}++' file
+```
+</details>
+
+
+
+
+---
+### Print out the file with lines numbered.
+
+<details><summary>perl:</summary>
+
+```bash
+perl -ne 'print "$. $_"' file
 ```
 </details>
 

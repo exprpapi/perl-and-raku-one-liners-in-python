@@ -1,19 +1,16 @@
 import sys, yaml
 
 def block(yaml_document):
-  def details(summary):
-    details = yaml_document.get(summary)
-    if details == None:
-      return ''
+  def details(solution):
+    details = yaml_document.get(solution)
     return (
-      f'<details><summary>{summary}:</summary>\n\n'
-      f'```bash\n'
-      f'{details}\n'
-      f'```\n'
-      f'</details>\n\n'
+      f'<details><summary>{solution}:</summary>\n\n'
+      f'```bash\n{details}\n```\n</details>\n\n'
     )
-  title = f'\n---\n### {yaml_document.get("title", "")}\n'
-  solutions = map(details, ('perl', 'python', 'canonical'))
+
+  title, *solutions = yaml_document.keys()
+  title = f'\n---\n### {yaml_document.get(title)}\n'
+  solutions = map(details, solutions)
   return title + ''.join(solutions)
 
 def main():
