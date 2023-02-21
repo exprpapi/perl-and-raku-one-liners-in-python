@@ -12,7 +12,8 @@ The 'canonical' solution, if given, is how I would actually do it, if I had to. 
 
 
 ---
-### Replace all occurences of `you` by `me` in the file `file`
+### Replace patterns in file
+Replace all occurences of `you` by `me` in the file `file`
 
 <details><summary>perl:</summary>
 
